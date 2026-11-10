@@ -1,20 +1,19 @@
-# Taller 11 · Ejercicio 4 — Viajes Andinos
+# Ejercicio 4 — Viajes Andinos
 
-Programación 1 (POO) · Universidad Libre · Docente: Andrés Castaño
+Programación 1 · Universidad Libre · Docente: Andrés Castaño
 
-## Situación
-Los asesores arman paquetes con constructores sobrecargados y setters: no se sabe qué constructor usar y salen paquetes sin destino o con 0 noches.
+## Cómo ejecutarlo
 
-## Cómo ejecutar
 ```bash
 javac -d out src/*.java
 java -cp out Main
 ```
-Al final de la salida, la línea **ESPERADO** dice cómo debe verse el programa cuando quede corregido.
 
-## Qué hacer
-1. Ejecute el código tal como está y observe la diferencia con lo **ESPERADO**.
-2. Identifique en el código la(s) línea(s) que delatan el problema.
-3. Decida qué patrón creacional aplica (Singleton, Factory Method o Builder) y refactorice.
-4. Ajuste `Main.java` solo en lo necesario para usar su solución (no borre los casos de prueba).
-5. Haga commit y push de su solución en este repositorio.
+## Qué hace
+
+Arma paquetes de viaje con destino y número de noches obligatorios, y con vuelo, hotel, desayuno, tour y seguro opcionales.
+
+## Qué se resolvió
+
+- **Antes:** `PaqueteViaje` tenía cuatro constructores sobrecargados y un setter por atributo. Era difícil saber cuál usar, y se podían crear paquetes incompletos o inválidos (sin destino o con 0 noches).
+- **Ahora:** se aplicó **Builder**. Cada paquete se arma indicando solo lo que incluye (`conHotel(...)`, `conSeguro()`, ...). `PaqueteViaje` quedó **inmutable** (campos `final` y sin setters), y `build()` rechaza con una excepción los paquetes sin destino o con menos de 1 noche
